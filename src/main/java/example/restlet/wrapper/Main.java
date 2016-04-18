@@ -21,7 +21,11 @@ public final class Main {
 	final Server server = new RESTServer(PORT, services);
 	server.open();
 
-	System.out.println("Server running, visit http://localhost:9192/hello");
+	System.out.println("Server running with the following services:");
+	for (Service s : server.getServices()) {
+	    System.out.println("\t" + s.getOperations()[0] + " http://localhost:" + PORT + s.getServicePath());
+	    System.out.println("\t\t" + s.getDescription());
+	}
 
 	/*
 	 * Wait 120 seconds before shutdown.
