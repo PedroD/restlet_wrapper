@@ -6,10 +6,12 @@ import java.util.logging.Level;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Restlet;
+import org.restlet.Server;
 import org.restlet.data.Protocol;
 import org.restlet.engine.Engine;
 import org.restlet.resource.ServerResource;
 import org.restlet.routing.Router;
+import org.restlet.util.Series;
 
 /**
  * Wrapper of a Restlet application, abstracting other classes from this implementation specific details.
@@ -111,8 +113,15 @@ final class RestletApplication extends Application {
      */
     public void open() throws Exception {
         Engine.setLogLevel(Level.SEVERE);
-        
-        this.component.getServers().add(Protocol.HTTP, this.serverPort);
+
+        final Server server = this.component.getServers().add(Protocol.HTTPS, this.serverPort);
+        @SuppressWarnings("rawtypes")
+        final Series parameters = server.getContext().getParameters();
+        parameters.add("sslContextFactory", "org.restlet.ext.ssl.PkixSslContextFactory");
+        parameters.add("keystorePath", "DUMMY.jks");
+        parameters.add("keystorePassword", "DUMMY PASS");
+        parameters.add("keyPassword", "DUMMY PASS");
+        parameters.add("keystoreType", "JKS");
 
         this.component.start();
         if (this.component.isStarted()) {

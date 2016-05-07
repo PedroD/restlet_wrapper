@@ -5,7 +5,7 @@ import java.io.Reader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.restlet.data.Header;
+import org.restlet.engine.header.Header;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ServerResource;
 import org.restlet.util.Series;

@@ -23,7 +23,7 @@ public final class Main {
 
 	System.out.println("Server running with the following services:");
 	for (Service s : server.getServices()) {
-	    System.out.println("\t" + s.getOperations()[0] + " http://localhost:" + PORT + s.getServicePath());
+	    System.out.println("\t" + s.getOperations()[0] + " https://localhost:" + PORT + s.getServicePath());
 	    System.out.println("\t\t" + s.getDescription());
 	}
 
